@@ -3,14 +3,14 @@
     partial class TwitchChatDisplay
     {
         /// <summary>
-        /// Erforderliche Designervariable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Verwendete Ressourcen bereinigen.
+        /// Clean up used resources.
         /// </summary>
-        /// <param name="disposing">True, wenn verwaltete Ressourcen gelöscht werden sollen; andernfalls False.</param>
+        /// <param name="disposing">True if managed resources are to be deleted; otherwise, False.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -23,8 +23,8 @@
         #region Vom Windows Form-Designer generierter Code
 
         /// <summary>
-        /// Erforderliche Methode für die Designerunterstützung.
-        /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
+        /// Required method for designer support.
+        /// The content of the method must not be changed using the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -32,9 +32,11 @@
             this.tbChannelname = new System.Windows.Forms.TextBox();
             this.lbChannelname = new System.Windows.Forms.Label();
             this.chatDisplay = new System.Windows.Forms.RichTextBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.btnClose = new System.Windows.Forms.Button();
             this.lbCredits = new System.Windows.Forms.Label();
+            this.lbConnectError = new System.Windows.Forms.Label();
+            this.btnMove = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbChannelname
@@ -71,15 +73,12 @@
             this.chatDisplay.TabIndex = 3;
             this.chatDisplay.Text = "";
             this.chatDisplay.Visible = false;
-            this.chatDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chatDisplay_MouseDown);
-            this.chatDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chatDisplay_MouseMove);
-            this.chatDisplay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.chatDisplay_MouseUp);
             // 
-            // backgroundWorker1
+            // backgroundWorker
             // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // btnClose
             // 
@@ -87,7 +86,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold);
             this.btnClose.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnClose.Location = new System.Drawing.Point(274, -1);
+            this.btnClose.Location = new System.Drawing.Point(309, -1);
             this.btnClose.Margin = new System.Windows.Forms.Padding(0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(27, 30);
@@ -107,6 +106,36 @@
             this.lbCredits.TabIndex = 5;
             this.lbCredits.Text = "by Okmeis";
             // 
+            // lbConnectError
+            // 
+            this.lbConnectError.AutoSize = true;
+            this.lbConnectError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbConnectError.ForeColor = System.Drawing.Color.Red;
+            this.lbConnectError.Location = new System.Drawing.Point(6, 3);
+            this.lbConnectError.Name = "lbConnectError";
+            this.lbConnectError.Size = new System.Drawing.Size(325, 20);
+            this.lbConnectError.TabIndex = 6;
+            this.lbConnectError.Text = "Please check your connection to twitch.";
+            this.lbConnectError.Visible = false;
+            // 
+            // btnMove
+            // 
+            this.btnMove.BackColor = System.Drawing.Color.DarkGray;
+            this.btnMove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMove.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold);
+            this.btnMove.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnMove.Location = new System.Drawing.Point(309, 29);
+            this.btnMove.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(27, 30);
+            this.btnMove.TabIndex = 8;
+            this.btnMove.Text = "📌";
+            this.btnMove.UseVisualStyleBackColor = false;
+            this.btnMove.Visible = false;
+            this.btnMove.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnMove_MouseDown);
+            this.btnMove.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnMove_MouseMove);
+            this.btnMove.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnMove_MouseUp);
+            // 
             // TwitchChatDisplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,6 +143,8 @@
             this.BackgroundImage = global::TwitchChatDisplayer.Properties.Resources.tcdIcon;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(336, 391);
+            this.Controls.Add(this.btnMove);
+            this.Controls.Add(this.lbConnectError);
             this.Controls.Add(this.lbCredits);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.chatDisplay);
@@ -133,9 +164,11 @@
         private System.Windows.Forms.TextBox tbChannelname;
         private System.Windows.Forms.Label lbChannelname;
         private System.Windows.Forms.RichTextBox chatDisplay;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lbCredits;
+        private System.Windows.Forms.Label lbConnectError;
+        private System.Windows.Forms.Button btnMove;
     }
 }
 
